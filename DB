@@ -1,0 +1,74 @@
+CREATE TABLE Users (
+    UserID VARCHAR(50) PRIMARY KEY,
+    UserName VARCHAR(50),
+    Email VARCHAR(100),
+    Password VARCHAR(255),
+    CoverImage BLOB,
+    Biography TEXT
+);
+
+CREATE TABLE Posts (
+    PostID VARCHAR(50) PRIMARY KEY,
+    UserID VARCHAR(50),
+    Content TEXT,
+    Image BLOB,
+    CreatedAt VARCHAR(50),
+    title VARCHAR(50),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE Comments (
+    CommentID VARCHAR(50) PRIMARY KEY,
+    UserID VARCHAR(50),
+    PostID VARCHAR(50),
+    Content TEXT,
+    CreatedAt VARCHAR(50),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (PostID) REFERENCES Posts(PostID)
+);
+
+DELIMITER //
+
+CREATE PROCEDURE InsertUser(IN pUserID VARCHAR(50), IN pUserName VARCHAR(50), IN pEmail VARCHAR(50), IN pPassword VARCHAR(50))
+BEGIN
+    INSERT INTO Users(UserID, UserName, Email, Password) VALUES (pUserID, pUserName, pEmail, pPassword);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetUserPassword(IN pUserName VARCHAR(50), IN pPassword VARCHAR(50))
+BEGIN
+    SELECT UserID FROM Users WHERE UserName = pUserName AND Password = pPassword;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE addpost(IN id VARCHAR(50), IN userid VARCHAR(50), IN context VARCHAR(50), IN image BLOB, IN createat VARCHAR(50), IN title VARCHAR(50))
+BEGIN
+    INSERT INTO Posts(PostID, UserID, Content, Image, CreatedAt, title) VALUES (id, userid, context, image, createat, title);
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE Getpersonpost(IN token VARCHAR(50))
+BEGIN
+    SELECT * FROM Posts WHERE UserID = token;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE delpost(IN id VARCHAR(50))
+BEGIN
+    DELETE FROM Posts WHERE PostID = id;
+END //
+
+DELIMITER ;
