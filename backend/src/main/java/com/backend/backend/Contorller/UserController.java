@@ -19,12 +19,16 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/signup")//註冊
-    public ResponseEntity<Users> Sign_up(@RequestBody Users data) {
+    public ResponseEntity<Users> Sign_up(@RequestBody Users data, HttpServletResponse response) {
         data.setPassword(PasswordEncoder.encode(data.getPassword()));
         UUID uuid1 = UUID.randomUUID();// uuid
         String uuidString1 = uuid1.toString();
         data.setUserID(uuidString1);
         userService.addUsers(data);// sql
+        Cookie cookie = new Cookie("token", uuidString1);// 建立一個Cookie 物件
+        cookie.setMaxAge(30*60);// 設置過期時間，若無設置時間，其生命週期將持續到Session 過期為止
+        cookie.setHttpOnly(true);// 設置為不能被JS 訪問的Cookie
+        response.addCookie(cookie);// 將Cookie 物件加入Response 中
         return new ResponseEntity<Users>(data, HttpStatus.OK);
     }
 
@@ -32,15 +36,12 @@ public class UserController {
     public ResponseEntity<Users> login(@RequestBody Users data, HttpServletResponse response) {
         data.setPassword(PasswordEncoder.encode(data.getPassword()));
         String token = userService.account_login(data);
-        if (token.length() > 0) {
-            Cookie cookie = new Cookie("token", token);// 建立一個Cookie 物件
-            cookie.setMaxAge(30*60);// 設置過期時間，若無設置時間，其生命週期將持續到Session 過期為止
-            cookie.setHttpOnly(true);// 設置為不能被JS 訪問的Cookie
-            response.addCookie(cookie);// 將Cookie 物件加入Response 中
-        } else {
-            System.out.println("token : "+token);
-            System.out.println("username : "+data.getUserName());
-        }
+
+        Cookie cookie = new Cookie("token", token);// 建立一個Cookie 物件
+        cookie.setMaxAge(30*60);// 設置過期時間，若無設置時間，其生命週期將持續到Session 過期為止
+        cookie.setHttpOnly(true);// 設置為不能被JS 訪問的Cookie
+        response.addCookie(cookie);// 將Cookie 物件加入Response 中
+
         return new ResponseEntity<Users>(data, HttpStatus.OK);
     }
 

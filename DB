@@ -80,7 +80,7 @@ DELIMITER //
 
 CREATE PROCEDURE GetAllPost()
 BEGIN
-    SELECT Posts.title, Posts.CreatedAt, Users.UserName, Posts.Content, Post.PostID
+    SELECT Posts.title, Posts.CreatedAt, Users.UserName, Posts.Content, Posts.PostID
 FROM Users
 INNER JOIN Posts ON Users.UserID = Posts.UserID;
 END //
