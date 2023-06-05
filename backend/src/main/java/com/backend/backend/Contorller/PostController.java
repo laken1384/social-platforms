@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -33,26 +33,18 @@ public class PostController {
         data.setPostID(uuidString1);
         data.setUserID(token);
         data.setCreatedAt(formattedDateTime);
-//        System.out.println("token"+token);
         postService.addposts(data);
         return new ResponseEntity<Posts>(data, HttpStatus.OK);
     }
 
     @GetMapping("/personpost")//取得個人貼文
     public ResponseEntity<List<PostComment>> personpost(@CookieValue(value = "token") String token) {
-//        if (token.length() < 0) {
-//            return HttpStatus.FAILED_DEPENDENCY;
-//        }
         System.out.println("token" + token);
         List<PostComment> result = postService.personposts(token);
         return new ResponseEntity<List<PostComment>>(result, HttpStatus.OK);
     }
-    @GetMapping("/allpost")//取得個人貼文
+    @GetMapping("/allpost")//取得全部貼文
     public ResponseEntity<List<PostComment>> allpost(@CookieValue(value = "token") String token) {
-//        if (token.length() < 0) {
-//            return new ResponseEntity<List<Posts>>( HttpStatus.FAILED_DEPENDENCY);
-////            return HttpStatus.FAILED_DEPENDENCY;
-//        }
         System.out.println("token" + token);
         List<PostComment> result = postService.allposts(token);
         return new ResponseEntity<List<PostComment>>(result, HttpStatus.OK);
@@ -60,10 +52,9 @@ public class PostController {
     @PostMapping("/delpost")
     private String delpost(@CookieValue(value = "token") String token, @RequestBody Posts data) {
         System.out.println(token + "/" + data.getUserID()+ "/" + data.getPostID());
-        if (token.equals(data.getUserID())) {
-            postService.delposts(data.getPostID());
-            return "OK";
-        }
-        return "Fail";
+
+        postService.delposts(data.getPostID());
+        return "OK";
+
     }
 }

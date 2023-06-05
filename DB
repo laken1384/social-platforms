@@ -70,6 +70,7 @@ DELIMITER //
 
 CREATE PROCEDURE delpost(IN id VARCHAR(50))
 BEGIN
+    DELETE FROM Comments WHERE PostID = id;
     DELETE FROM Posts WHERE PostID = id;
 END //
 

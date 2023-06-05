@@ -88,8 +88,7 @@ export default {
     },
     Delpost(e) {
       delpost({
-        postID: e.postID,
-        userID: e.userID
+        postID: e.postID
       }).then(() => {
           location.reload();
         }).catch((error) => {

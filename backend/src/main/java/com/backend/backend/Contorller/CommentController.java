@@ -1,9 +1,9 @@
 package com.backend.backend.Contorller;
 
 import com.backend.backend.domin.Comments;
-import com.backend.backend.domin.Posts;
+
 import com.backend.backend.service.CommentService;
-import com.backend.backend.service.PostService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @PostMapping("/addcomment")//註冊
+    @PostMapping("/addcomment")//新增留言
     public ResponseEntity<Comments> create_post(@RequestBody Comments data, @CookieValue(value = "token") String token) {
         UUID uuid1 = UUID.randomUUID();// uuid
         String uuidString1 = uuid1.toString();

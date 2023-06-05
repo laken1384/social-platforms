@@ -20,22 +20,16 @@ public class UserController {
 
     @PostMapping("/signup")//註冊
     public ResponseEntity<Users> Sign_up(@RequestBody Users data) {
-//        String o = PasswordEncoderUtils.encodePassword(data.getPassword());
         data.setPassword(PasswordEncoder.encode(data.getPassword()));
         UUID uuid1 = UUID.randomUUID();// uuid
         String uuidString1 = uuid1.toString();
-        Users tUser = new Users();
-//        System.out.println("email : " + data.getEmail());
-//        System.out.println("username : " + data.getUserName());
         data.setUserID(uuidString1);
-//        System.out.println("apple : " + data.getEmail());
         userService.addUsers(data);// sql
         return new ResponseEntity<Users>(data, HttpStatus.OK);
     }
 
     @PostMapping("/login")//登陸
     public ResponseEntity<Users> login(@RequestBody Users data, HttpServletResponse response) {
-//        String o = PasswordEncoderUtils.encodePassword(data.getPassword());
         data.setPassword(PasswordEncoder.encode(data.getPassword()));
         String token = userService.account_login(data);
         if (token.length() > 0) {
@@ -47,17 +41,9 @@ public class UserController {
             System.out.println("token : "+token);
             System.out.println("username : "+data.getUserName());
         }
-//        System.out.println("token : " + token);
         return new ResponseEntity<Users>(data, HttpStatus.OK);
     }
 
-
-    // 讀取Cookie
-    @RequestMapping(value = "/getCookie", method = RequestMethod.GET)
-    public String getCookie(@CookieValue(value = "username") String username) {
-
-        return "Hello! " + username;
-    }
 
 
 }
