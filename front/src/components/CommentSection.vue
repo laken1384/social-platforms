@@ -2,8 +2,8 @@
   <div class="comments">
     <h3>留言</h3>
     <ul>
-      <li v-for="comment in comments" :key="comment.id">
-        <strong>{{ comment.id }}</strong>: {{ comment.text }}
+      <li v-for="comment in comments.slice(1)" :key="comment.id">
+        <strong>{{ comment.userName }}</strong>: {{ comment.comments }}
       </li>
     </ul>
     <form @submit.prevent="addComment(ID)">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { addcomment } from "@/api.js";
 export default {
   props: {
     initialComments: {
@@ -21,8 +22,8 @@ export default {
       default: () => [],
     },
     initialID: {
-    type: String, // 或根据实际情况更改类型
-    required: true,
+    type: String,
+    required: true
   },
   },
   data() {
@@ -33,15 +34,16 @@ export default {
     };
   },
   methods: {
-    addComment(o) {
-      // let o = this.id;
-      console.log("ID", o);
-      const newComment = {
-        id: Date.now(),
-        text: this.newCommentText,
-      };
-      this.comments.push(newComment);
-      this.newCommentText = "";
+    addComment() {
+      let postID = this.comments[0].postID;
+      addcomment({
+        content: this.newCommentText,
+        postID: postID
+      }).then(() => {
+        location.reload();
+        }).catch((error) => {
+          console.error(error);
+        });
     },
   },
 };

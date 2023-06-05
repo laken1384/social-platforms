@@ -1,6 +1,5 @@
 package com.backend.backend.service;
 
-import com.backend.backend.domin.User;
 import com.backend.backend.domin.Users;
 import com.backend.backend.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     UserDao userDao;
-    public void addUser(User pUser){
-        userDao.addUser(pUser);
-    }
+
     public void addUsers(Users pUser){
         userDao.addUsers(pUser);
     }

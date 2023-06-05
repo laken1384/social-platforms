@@ -12,8 +12,10 @@ const login = axios.create({
 
 export const Login = (cell) => login.post('/login', cell);
 export const Sginup = (cell) => login.post('/signup', cell);
-export const personpost = () => login.post('/personpost');
+export const personpost = () => login.get('/personpost');
 export const allpost = () => login.get('/allpost');
 
 export const addContext = (cell) => login.post('/create_post', cell);
 export const delpost = (cell) => login.post('/delpost', cell);
+
+export const addcomment = (cell) => login.post('/addcomment', cell);

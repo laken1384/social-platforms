@@ -8,10 +8,11 @@
       <div class="post" v-for="post in posts" :key="post.id">
         <div style="display: flex;justify-content: center;">
           <h2>{{ post.title }}</h2>
+
         </div>
-        <p>{{ post.createdAt }}</p>
-        <p>{{ post.content }}</p>
-        <comment :initial-comments="post.comments"></comment>
+        <p>{{ post.username + " : 於" + post.createdAt + "發布"}}</p>
+        <p>{{ post.context }}</p>
+        <comment :initial-comments="post.comment"></comment>
       </div>
     </div>
   </div>
@@ -43,15 +44,17 @@ export default {
         allpost()
         .then((response) => {
           let data = response.data; // 将获取到的数据赋值给组件的 data 属性
-          this.posts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          console.log(data);
+          let datasort = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          this.posts = datasort.map(a => {
+            let b = a.comment
+            a.comment = [{postID: a.postID}, ...b];
+            return a;
+          });
+          console.log(datasort);
         }).catch((error) => {
           console.error(error);
         });
       },
-      // addComment(post) {
-      //   // 添加评论的方法
-      // },
     addComment(post) {
       const newComment = {
         id: Date.now(),

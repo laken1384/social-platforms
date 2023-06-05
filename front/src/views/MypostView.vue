@@ -2,7 +2,7 @@
   <div class="home">
     <div class="user-profile">
       <router-link to="/main">全部貼文</router-link> |
-      <router-link to="/login">登出</router-link> |
+      <router-link to="/login">登出</router-link>
     </div>
     <div class="posts">
       <div class="post" v-for="post in posts" :key="post.id">
@@ -11,9 +11,9 @@
           <h2>{{ post.title }}</h2>
           <i class="fas fa-times" @click="()=>Delpost(post)"></i>
         </div>
-        <p>{{ post.createdAt }}</p>
-        <p>{{ post.content }}</p>
-        <comment :initial-comments="post.comments"></comment>
+        <p>{{ post.username + " : 於" + post.createdAt + "發布"}}</p>
+        <p>{{ post.context }}</p>
+        <comment :initial-comments="post.comment"></comment>
       </div>
     </div>
     <form @submit.prevent="addContext">
@@ -56,15 +56,18 @@ export default {
         personpost()
         .then((response) => {
           let data = response.data; // 将获取到的数据赋值给组件的 data 属性
-          this.posts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-          console.log(data);
+          let datasort = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          // datasort
+          this.posts = datasort.map(a => {
+            let b = a.comment
+            a.comment = [{postID: a.postID}, ...b];
+            return a;
+          })
+          console.log( datasort);
         }).catch((error) => {
           console.error(error);
         });
       },
-      // addComment(post) {
-      //   // 添加评论的方法
-      // },
     addComment(post) {
       const newComment = {
         id: Date.now(),

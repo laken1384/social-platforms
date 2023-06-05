@@ -1,5 +1,6 @@
 package com.backend.backend.Contorller;
 
+import com.backend.backend.domin.Comment.PostComment;
 import com.backend.backend.domin.Posts;
 import com.backend.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,24 +38,24 @@ public class PostController {
         return new ResponseEntity<Posts>(data, HttpStatus.OK);
     }
 
-    @PostMapping("/personpost")//取得個人貼文
-    public ResponseEntity<List<Posts>> personpost(@CookieValue(value = "token") String token) {
+    @GetMapping("/personpost")//取得個人貼文
+    public ResponseEntity<List<PostComment>> personpost(@CookieValue(value = "token") String token) {
 //        if (token.length() < 0) {
 //            return HttpStatus.FAILED_DEPENDENCY;
 //        }
         System.out.println("token" + token);
-        List<Posts> result = postService.personposts(token);
-        return new ResponseEntity<List<Posts>>(result, HttpStatus.OK);
+        List<PostComment> result = postService.personposts(token);
+        return new ResponseEntity<List<PostComment>>(result, HttpStatus.OK);
     }
     @GetMapping("/allpost")//取得個人貼文
-    public ResponseEntity<List<Posts>> allpost(@CookieValue(value = "token") String token) {
+    public ResponseEntity<List<PostComment>> allpost(@CookieValue(value = "token") String token) {
 //        if (token.length() < 0) {
 //            return new ResponseEntity<List<Posts>>( HttpStatus.FAILED_DEPENDENCY);
 ////            return HttpStatus.FAILED_DEPENDENCY;
 //        }
         System.out.println("token" + token);
-        List<Posts> result = postService.allposts(token);
-        return new ResponseEntity<List<Posts>>(result, HttpStatus.OK);
+        List<PostComment> result = postService.allposts(token);
+        return new ResponseEntity<List<PostComment>>(result, HttpStatus.OK);
     }
     @PostMapping("/delpost")
     private String delpost(@CookieValue(value = "token") String token, @RequestBody Posts data) {

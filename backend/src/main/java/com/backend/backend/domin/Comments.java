@@ -7,33 +7,33 @@ import java.sql.Date;
 
 @Component
 public class Comments {
-    private Integer CommentID;
-    private Integer UserID;
-    private Integer PostID;
+    private String CommentID;
+    private String UserID;
+    private String PostID;
     private String Content;
-    private Date CreateAt;
+    private String CreateAt;
 
-    public Integer getCommentID() {
+    public String getCommentID() {
         return CommentID;
     }
 
-    public void setCommentID(Integer commentID) {
+    public void setCommentID(String commentID) {
         CommentID = commentID;
     }
 
-    public Integer getUserID() {
+    public String getUserID() {
         return UserID;
     }
 
-    public void setUserID(Integer userID) {
+    public void setUserID(String userID) {
         UserID = userID;
     }
 
-    public Integer getPostID() {
+    public String getPostID() {
         return PostID;
     }
 
-    public void setPostID(Integer postID) {
+    public void setPostID(String postID) {
         PostID = postID;
     }
 
@@ -45,11 +45,11 @@ public class Comments {
         Content = content;
     }
 
-    public Date getCreateAt() {
+    public String getCreateAt() {
         return CreateAt;
     }
 
-    public void setCreateAt(Date createAt) {
+    public void setCreateAt(String createAt) {
         CreateAt = createAt;
     }
 }

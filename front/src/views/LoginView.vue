@@ -31,8 +31,6 @@ export default {
     return {
       username: "",
       password: "",
-      snackbarMessage: "", // Snackbar 的提示信息
-      showSnackbar: false // 控制 Snackbar 的显示状态
     };
   },
   methods: {
@@ -50,11 +48,6 @@ export default {
         .catch(error => {
           // 登录失败或发生错误的处理
           console.error(error);
-          this.snackbarMessage = "登录失败，请检查用户名和密码";
-          this.showSnackbar = true; // 显示 Snackbar
-          setTimeout(() => {
-            this.showSnackbar = false; // 3秒后隐藏 Snackbar
-          }, 3000);
         });
     },
   },
