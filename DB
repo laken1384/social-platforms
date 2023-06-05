@@ -58,7 +58,9 @@ DELIMITER //
 
 CREATE PROCEDURE Getpersonpost(IN token VARCHAR(50))
 BEGIN
-    SELECT * FROM Posts WHERE UserID = token;
+    SELECT Posts.title, Posts.CreatedAt, Users.UserName, Posts.Content, Posts.PostID
+FROM Users
+INNER JOIN Posts ON Users.UserID = Posts.UserID WHERE Posts.UserID = token;
 END //
 
 DELIMITER ;
@@ -69,6 +71,39 @@ DELIMITER //
 CREATE PROCEDURE delpost(IN id VARCHAR(50))
 BEGIN
     DELETE FROM Posts WHERE PostID = id;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GetAllPost()
+BEGIN
+    SELECT Posts.title, Posts.CreatedAt, Users.UserName, Posts.Content, Post.PostID
+FROM Users
+INNER JOIN Posts ON Users.UserID = Posts.UserID;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE GetComment(IN postid VARCHAR(50))
+BEGIN
+
+SELECT Users.UserName, Comments.Content
+FROM Users
+INNER JOIN Comments ON Users.UserID = Comments.UserID WHERE Comments.PostID = postid;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE addcomment(IN commentID VARCHAR(50), IN postID VARCHAR(50), IN userID VARCHAR(50), IN content VARCHAR(50))
+BEGIN
+    INSERT INTO Comments(CommentID, UserID, PostID, Content) VALUES (commentID, postID, userID, content);
 END //
 
 DELIMITER ;
