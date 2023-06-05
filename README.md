@@ -27,7 +27,7 @@ npm run serve
 ### 介紹
 - 使用者登錄時可先註冊，會返回一個Cookie(Http only不會被JS存取)，以後取得貼文都帶此Cookie取資料。
 - 貼文部分分為全部貼文及我的貼文，我的貼文可以做刪除，以及可以新增貼文。
-- 留言部份僅於前端呈現，時間不足無法及時接上後端，日後有時間會再做修正。
+- 可於文章下方留言，回顯示留言者帳號名稱及內容。
 ### 特色
 - 有做參數化查詢，防止SQL Injection
 - 利用Stored Procedure阻止XSS攻擊
@@ -36,19 +36,23 @@ npm run serve
 
 登入畫面：
 
-<img width="800" alt="截圖 2023-06-04 23 22 24" src="https://github.com/laken1384/social-platforms/assets/43467156/04678f29-ee5f-4249-aad9-04657f238a64">
+<img width="800" alt="截圖 2023-06-05 10 53 40" src="https://github.com/laken1384/social-platforms/assets/43467156/b4705923-564e-47f6-b648-86702019d630">
+
 
 註冊畫面：
 
-<img width="800" alt="截圖 2023-06-04 23 23 11" src="https://github.com/laken1384/social-platforms/assets/43467156/169c2d1e-dfd3-4482-877d-015b93797ab2">
+<img width="800" alt="截圖 2023-06-05 10 53 54" src="https://github.com/laken1384/social-platforms/assets/43467156/180ba613-1a2b-45e7-8771-1350da04a7f4">
 
-可看到全部貼文：
 
-<img width="800" alt="截圖 2023-06-04 23 25 09" src="https://github.com/laken1384/social-platforms/assets/43467156/3c322e2b-2d9a-4343-91bb-5e9d9cc0b410">
+可看到全部貼文，上方可作切換，看到自己發的文：
+
+<img width="800" alt="截圖 2023-06-05 10 53 07" src="https://github.com/laken1384/social-platforms/assets/43467156/892c571d-af43-4fd5-a86a-9db35684fdec">
+
 
 可看到自己的貼文：
    - 右上角的叉叉可以刪除貼文
    - 下方可以新增貼文
 
-<img width="800" alt="截圖 2023-06-04 23 25 19" src="https://github.com/laken1384/social-platforms/assets/43467156/93a2d6b0-0624-4f96-8a5c-2cc8a4e4c735">
+<img width="800" alt="截圖 2023-06-05 10 53 29" src="https://github.com/laken1384/social-platforms/assets/43467156/195ab463-a96e-47ca-9492-7765b7a6fbf9">
+
 
