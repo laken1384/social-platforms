@@ -45,14 +45,11 @@ npm run serve
 
 
 可看到全部貼文，上方可作切換，看到自己發的文：
-
-<img width="800" alt="截圖 2023-06-05 10 53 07" src="https://github.com/laken1384/social-platforms/assets/43467156/892c571d-af43-4fd5-a86a-9db35684fdec">
-
+<img width="800" alt="截圖 2023-06-13 08 40 51" src="https://github.com/laken1384/social-platforms/assets/43467156/89f68ea9-fe37-4ee1-a93b-de9faa774e09">
 
 可看到自己的貼文：
    - 右上角的叉叉可以刪除貼文
    - 下方可以新增貼文
 
-<img width="800" alt="截圖 2023-06-05 10 53 29" src="https://github.com/laken1384/social-platforms/assets/43467156/195ab463-a96e-47ca-9492-7765b7a6fbf9">
-
+<img width="800" alt="截圖 2023-06-13 08 41 02" src="https://github.com/laken1384/social-platforms/assets/43467156/1577d391-4a4d-45d6-a123-dc0844393fa5">
 
